@@ -4,22 +4,50 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-<link rel="stylesheet" href="style.css">
+  <title>TEXT+COLOR+IMAGE</title>
 </head>
-<body onkeydown="keyJs(event)">
-  <div class="display">
-    <div>
-      <div class="daskeya"></div>
-      <div id="divul">
-          <div class="keycode-display"></div>
-          <div class="aiapasat"></div>
-          <div class="text-display">Press any Knopka</div>
-      </div>
-    </div>
-  </div>
-  <script src="script.js">
+<body>
+  <div id="wrapper">Image mit Text</div>
+<form>
+  <select onchange="imgU()">
+    <option value="">Select</option>
+    <option value="150x150">Small</option>
+    <option value="350x150">Medium</option>
+    <option value="750x150">Large</option>
+  </select> Size
+  <br>
+  Add text here:
+    <input type="text" onchange="imgU()">
+  <br>
+  Select your color here:
+    <input type="color" onchange="imgU()">
+  <br>
+    <img src="http://via.placeholder.com/350x150/222/fff?text=image1" id="myImage">
+</form>
+Copy this direct link : <br><br><br>
+<div id="srcimg"></div>
+<script>
+var iColor ="222";
+var iText ="Image1";
+var iSize="350x150";
+  function imgU(){
+    console.dir(event.target);//input
+    console.dir(event.target.value);//text
+    console.dir(event.target.parentElement.myImage.src);//form>img>src
+      if(event.target.type =="select-one"){
+        iSize = event.target.value;
+      }else if(event.target.type =="text"){
+        iText = event.target.value;
+      }else if(event.target.type=="color"){
+        var nColor = event.target.value;
+        iColor = nColor.replace("#","");
+      }
 
-  </script>
+var imgSrc="http://via.placeholder.com/"+iSize+"/"+iColor+"/fff?text="+iText;
+event.target.parentElement.myImage.src= imgSrc;
+document.getElementById('srcimg').innerHTML = document.getElementById('myImage').src;
+
+  }
+</script>
 </body>
 </html>
